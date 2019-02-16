@@ -1,6 +1,6 @@
 # AppTemplate
-<p>Android application template with no dependencies, which makes very fast app build.</p>
-<p>This application shows how small can be Android app. Apk file about ~100kb size</p>
+<p>Android application template with no dependencies.</p>
+<p>Makes builds very fast, apk very small and very fast app start.</p>
 
 ### License
 

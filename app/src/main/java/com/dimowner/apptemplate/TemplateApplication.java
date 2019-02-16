@@ -23,8 +23,9 @@ import android.app.Application;
 import android.content.Context;
 import android.os.Handler;
 
-import com.dimowner.apptemplate.util.AppStartTracker;
+import com.crashlytics.android.Crashlytics;
 
+import io.fabric.sdk.android.Fabric;
 import timber.log.Timber;
 
 public class TemplateApplication extends Application {
@@ -32,16 +33,6 @@ public class TemplateApplication extends Application {
 	@SuppressLint("StaticFieldLeak")
 	public static volatile Context applicationContext;
 	public static volatile Handler applicationHandler;
-
-	private AppStartTracker startTracker = new AppStartTracker();
-
-	public static AppStartTracker getAppStartTracker(Context context) {
-		return ((TemplateApplication) context).getStartTracker();
-	}
-
-	private AppStartTracker getStartTracker() {
-		return startTracker;
-	}
 
 	@Override
 	public void onCreate() {
@@ -54,8 +45,8 @@ public class TemplateApplication extends Application {
 				}
 			});
 		}
-		startTracker.appOnCreate();
 		super.onCreate();
+		Fabric.with(this, new Crashlytics());
 
 		applicationContext = getApplicationContext();
 		applicationHandler = new Handler(applicationContext.getMainLooper());
